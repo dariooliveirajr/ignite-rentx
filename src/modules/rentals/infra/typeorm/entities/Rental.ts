@@ -18,7 +18,7 @@ class Rental {
 
   @ManyToOne(() => Car)
   @JoinColumn({ name: "car_id" })
-  car: string;
+  car_id: string;
 
   @Column()
   user_id: string;
