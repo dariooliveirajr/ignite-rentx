@@ -12,11 +12,21 @@ class UsersTokensRepository implements IUsersTokensRepository {
     this.repository = getRepository(UserTokens);
   }
 
-  create({
+  async create({
     expires_date,
     refresh_token,
     user_id,
-  }: ICreateUserTokenDTO): Promise<UserTokens> {}
+  }: ICreateUserTokenDTO): Promise<UserTokens> {
+    const userToken = this.repository.create({
+      expires_date,
+      refresh_token,
+      user_id,
+    });
+
+    await this.repository.save(userToken);
+
+    return userToken;
+  }
 }
 
 export { UsersTokensRepository };
